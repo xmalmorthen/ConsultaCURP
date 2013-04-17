@@ -18,6 +18,7 @@
  */
 var app = $.mobile.GapNote = {
     initialize: function() {
+		this.checkConnection();
         this.bind();
     },
     bind: function() {
@@ -39,12 +40,26 @@ var app = $.mobile.GapNote = {
         var completeElem = document.querySelector('#' + id + ' .complete');
         completeElem.className = completeElem.className.split('hide').join('');
     },
+	checkConnection: function (){
+        var networkState = navigator.connection.type;
+
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
+
+		app.MsgBox("Tipo de Conexion: " + states[networkState]);
+    },
 	MsgBox : function (Message){
 		$("#msgBox_Message").html(Message)
 		$("#positionWindow").popup("open");
 	},
-	callremote: function (){
-		
+	callremote: function (){		
 	},
 	buscaCURP_by_CURP : function(){
 		var CURP = $('#txtCURP').val();
@@ -62,7 +77,7 @@ var app = $.mobile.GapNote = {
 				call = server + "/" + service + "/" + method + "/" + CURP;							
 							
 				var jqxhr = $.get(call, function(data) {
-					//console.log (data);
+					console.log (data);
 					app.MsgBox("Correcto");
 				}, "json")
 				.fail(function() { 				
