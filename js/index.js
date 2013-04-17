@@ -60,13 +60,14 @@ var app = $.mobile.GapNote = {
 			    service = "CURP",
 				method = "getInfo",
 				call = server + "/" + service + "/" + method + "/" + CURP;							
-			var jqxhr = $.get(call, function(data) {
-				console.log (data);
-				this.MsgBox("Correcto");
-			}, "json")
-			.fail(function() { 				
-				app.MsgBox("Ocurrió un error al intentar conectar con el servidor...");				
-			});			
+							
+				var jqxhr = $.get(call, function(data) {
+					//console.log (data);
+					app.MsgBox("Correcto");
+				}, "json")
+				.fail(function() { 				
+					app.MsgBox("Ocurrió un error al intentar conectar con el servidor...");				
+				});			
 		}		
 	}
 };
