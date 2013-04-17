@@ -1,42 +1,216 @@
-<!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
+<!DOCTYPE html> 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready">
-                <p class="status pending blink">Connecting to Device</p>
-                <p class="status complete blink hide">Device is Ready</p>
+<head>
+<meta charset="utf-8">
+<title>Aplic. Web de jQuery Mobile</title>
+<link href="jquery-mobile/jquery.mobile-1.3.1.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-mobile/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.3.1.min.js" type="text/javascript"></script>
+<!--<script type="text/javascript" src="phonegap.js"></script>-->
+<script type="text/javascript" src="js/index.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" id="main">
+    <div data-role="header" style="overflow:hidden;">
+        <h1>Consulta CURP</h1>
+        <a href="#main" data-icon="info" class="ui-btn-right">Info</a>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#CURP_by_CURP" data-icon="star">Consulta por CURP</a></li>
+                <li><a href="#CURP_by_Data" data-icon="grid">Consulta por Datos</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+	<div data-role="content">	
+		<h3>	Cuándo consultar la CURP</h3>
+		<p>	Puede consultar su CURP en cualquiera de los siguientes casos: </p>
+		<ul>
+        	<li>Si tramitó su clave en alguno de los módulos de atención CURP y no obtuvo la constancia.</li>
+			<li>Si perdió la constancia de su clave.</li>
+			<li>Si existe la posibilidad de que alguien haya tramitado su CURP, por ejemplo en la escuela, en el trabajo, en el IMSS y no recibió su constancia.</li>
+			<li>La consulta puede efectuarse indicando la clave CURP cuando ya la conoce o proporcionando su nombre y datos de nacimiento.</li>
+	    </ul>
+	</div>    
+</div>
+
+<div data-role="page" id="CURP_by_CURP">
+	<div data-role="header" style="overflow:hidden;">
+        <h1>Consulta por CURP</h1>
+        <a href="#main" data-icon="info" class="ui-btn-right">Info</a>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#CURP_by_CURP" data-icon="star">Consulta por CURP</a></li>
+                <li><a href="#CURP_by_Data" data-icon="grid">Consulta por Datos</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+	<div data-role="content" id="request">	
+            <label for="text-basic">CURP:</label>
+            <input type="text" name="txtCURP" id="txtCURP" value="">
+            <input type="button" value="Buscar" data-icon="check" data-theme="d" onClick="app.buscaCURP_by_CURP();">
+	</div>
+  	<div data-role="content" id="response" style="display:none;">
+	    <hr>
+	    <h4>DATOS PERSONALES</h4>
+    	<div class="ui-grid-a ui-responsive">
+	    	<div class="ui-block-a">
+	            <label for="text-basic">NOMBRE:</label>
             </div>
-        </div>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+	    	<div class="ui-block-b">
+                <label id="lblNombre" for="text-basic">lblNombre</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">PRIMER APELLIDO:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblAp1" for="text-basic">lblAp1</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">SEGUNDO APELLIDO:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblAp2" for="text-basic">lblAp2</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">ENTIDAD:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblEnt" for="text-basic">lblEnt</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">FECHA DE NACIMIENTO:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblFNac" for="text-basic">lblFNac</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">SEXO:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblSex" for="text-basic">lblSex</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">NACIONALIDAD:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblNac" for="text-basic">lblNac</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">CLAVE DP:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblCveDP" for="text-basic">lblCveDP</label>
+            </div>            
+		</div><!-- /grid-a -->
+        <h4>DOCUMENTO PROBATORIO</h4>
+    	<div class="ui-grid-a ui-responsive">
+	    	<div class="ui-block-a">
+	            <label for="text-basic">AÑO DE REGISTRO:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblDocAnio" for="text-basic">lblDocAnio</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">FOJA:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblFoja" for="text-basic">lblFoja</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">TOMO:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblTomo" for="text-basic">lblTomo</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">LIBRO:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblLib" for="text-basic">lblLib</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">NUMERO:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblNum" for="text-basic">lblNum</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">ACTA CRIP:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblActaCrip" for="text-basic">lblActaCrip</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">NUMERO DE ENTIDAD DE REGISTRO DE ACTA:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblNumEntRegAct" for="text-basic">lblNumEntRegAct</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">NUMERO DE MUNICIPIO DE REGISTRO DE ACTA:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblNumMunRegAct" for="text-basic">lblNumMunRegAct</label>
+            </div>            
+		</div><!-- /grid-a -->
+        <h4>MAS INFO...</h4>
+    	<div class="ui-grid-a ui-responsive">
+	    	<div class="ui-block-a">
+	            <label for="text-basic">FOLIO:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblFol" for="text-basic">lblFol</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">FECHA DE ALTA:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblFAlta" for="text-basic">lblFAlta</label>
+            </div>
+            <div class="ui-block-a">
+	            <label for="text-basic">ESTATUS:</label>
+            </div>
+	    	<div class="ui-block-b">
+                <label id="lblEst" for="text-basic">lblEst</label>
+            </div>           
+		</div><!-- /grid-a -->
+	</div> 
+
+<!-- poop ups -->
+<div data-role="popup" id="positionWindow" class="ui-content" data-theme="d">
+    <p id="msgBox_Message">MENSAJE</p>
+</div>
+ 
+</div>
+    
+
+<div data-role="page" id="CURP_by_Data">
+	<div data-role="header">
+		<h1>Página tres</h1>
+	</div>
+	<div data-role="content">	
+		Contenido		
+	</div>
+	<div data-role="footer">
+		<h4>Pie de página</h4>
+	</div>
+</div>
+
+<div data-role="page" id="page4">
+	<div data-role="header">
+		<h1>Página cuatro</h1>
+	</div>
+	<div data-role="content">	
+		Contenido		
+	</div>
+	<div data-role="footer">
+		<h4>Pie de página</h4>
+	</div>
+</div>
+
+    <script type="text/javascript">
+		app.initialize();
+    </script>
+</body>
 </html>

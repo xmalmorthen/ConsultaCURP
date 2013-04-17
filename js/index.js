@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = {
+var app = $.mobile.GapNote = {
     initialize: function() {
         this.bind();
     },
@@ -38,5 +38,35 @@ var app = {
         document.querySelector('#' + id + ' .pending').className += ' hide';
         var completeElem = document.querySelector('#' + id + ' .complete');
         completeElem.className = completeElem.className.split('hide').join('');
-    }
+    },
+	MsgBox : function (Message){
+		$("#msgBox_Message").html(Message)
+		$("#positionWindow").popup("open");
+	},
+	callremote: function (){
+		
+	},
+	buscaCURP_by_CURP : function(){
+		var CURP = $('#txtCURP').val();
+		if (CURP.length == 0 ) {			
+			this.MsgBox("Falta introducir la CURP...");
+		} else if (CURP.length != 18) {
+			this.MsgBox("Formato de CURP incorrecto, favor de revisar...");
+		} else {		
+			var 
+				usr = "xmalmorthen",
+				pwd = "b16f550d147bf92e9455074d9edfe013",
+				server = "http://" + usr + ":" + pwd + "@wsrenapo.col.gob.mx/curp2",
+			    service = "CURP",
+				method = "getInfo",
+				call = server + "/" + service + "/" + method + "/" + CURP;							
+			var jqxhr = $.get(call, function(data) {
+				console.log (data);
+				this.MsgBox("Correcto");
+			}, "json")
+			.fail(function() { 				
+				app.MsgBox("Ocurrió un error al intentar conectar con el servidor...");				
+			});			
+		}		
+	}
 };
